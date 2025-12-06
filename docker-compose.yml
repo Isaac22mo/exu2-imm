@@ -1,0 +1,32 @@
+services:
+  calculator:
+    container_name: exu2-calculadora
+    image: client:v1.0.3
+    ports:
+      - "80:80"
+    networks:
+      - exu2-imm-net
+    build: 
+      context: ./client
+      args:
+        API_HOST: localhost
+        API_PORT: 8081  
+        API_BASE: /suma 
+    depends_on:
+      - calculator
+    
+  operations:
+    container_name: exu2-operaciones
+    image: calculator:v1.0.3
+    build: 
+      context: ./server
+    ports:
+      - "8081:8080"
+    networks:
+      - exu2-imm-net
+
+# Aqui se configuran las redes donde se comunican los contenedores
+# docker network create --driver bridge i2ex-ajsc-net
+networks:
+  exu2-imm-net:
+    external: true
