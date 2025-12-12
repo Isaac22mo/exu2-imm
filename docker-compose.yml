@@ -10,9 +10,6 @@ services:
       context: ./client
       args:
         API_URL: http://localhost:8081/suma
-        API_HOST: localhost
-        API_PORT: 8081  
-        API_BASE: /suma 
     depends_on:
       - calculator
     
